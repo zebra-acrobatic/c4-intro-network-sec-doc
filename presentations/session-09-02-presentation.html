@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Control Policies</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 60px;
+            max-width: 1000px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            display: none;
+            animation: slideIn 0.5s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            color: #34495e;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.8em;
+            margin: 20px 0 15px 0;
+            color: #2c3e50;
+        }
+
+        p, li {
+            font-size: 1.3em;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        li::before {
+            content: "▶";
+            color: #667eea;
+            font-weight: bold;
+            position: absolute;
+            left: -25px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .example-box h4 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .use-case {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            transform: perspective(1000px) rotateX(2deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .slide-indicator {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            color: #2c3e50;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .title-slide {
+            text-align: center;
+            padding: 80px 60px;
+        }
+
+        .title-slide h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .title-slide p {
+            font-size: 1.5em;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .sophos-highlight {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .policy-diagram {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 25px 0;
+            text-align: center;
+            text-decoration: antiquewhite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .policy-diagram::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .policy-diagram > * {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active title-slide">
+            <h1>Application Control Policies</h1>
+            <p>Understanding Traffic Control and Policy Implementation</p>
+            <div class="sophos-highlight">
+                Focus: Application Policy Engine & Real-World Examples
+            </div>
+        </div>
+
+        <!-- Slide 2: What is Application Control? -->
+        <div class="slide">
+            <h2>What is Application Control?</h2>
+            <div class="highlight">
+                <p>Application control is a security technique that allows administrators to control which applications can run on a network and how they behave.</p>
+            </div>
+            <h3>Key Components:</h3>
+            <ul>
+                <li><strong>Application Identification:</strong> Deep packet inspection to identify applications regardless of port or protocol</li>
+                <li><strong>Policy Enforcement:</strong> Rules that determine what actions to take for each application</li>
+                <li><strong>Traffic Shaping:</strong> Controlling bandwidth and priority for different applications</li>
+                <li><strong>User/Group-Based Controls:</strong> Different policies for different users or departments</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Sophos Application Policy Engine -->
+        <div class="slide">
+            <h2>Example - Sophos Application Policy Engine</h2>
+            <div class="sophos-highlight">
+                Application control and traffic management solution
+            </div>
+            <h3>Core Features:</h3>
+            <ul>
+                <li><strong>Deep Packet Inspection (DPI):</strong> Identifies applications by analysing packet content, not just ports</li>
+                <li><strong>Application Database:</strong> Recognises thousands of applications including custom and cloud-based apps</li>
+                <li><strong>Real-time Classification:</strong> Continuously monitors and classifies network traffic</li>
+                <li><strong>Policy Templates:</strong> Pre-configured policies for common use cases</li>
+                <li><strong>Bandwidth Management:</strong> Granular control over application bandwidth usage</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: How Application Control Works -->
+        <div class="slide">
+            <h2>How Application Control Works</h2>
+            <div class="policy-diagram">
+                <h3>Traffic Flow Process</h3>
+                <p>1. Traffic Capture → 2. Application Identification → 3. Policy Lookup → 4. Action Enforcement</p>
+            </div>
+            <h3>Identification Methods:</h3>
+            <ul>
+                <li><strong>Signature-Based:</strong> Matches known patterns in application data</li>
+                <li><strong>Behavioral Analysis:</strong> Analyzes traffic patterns and behaviors</li>
+                <li><strong>Heuristic Detection:</strong> Uses rules and algorithms to identify unknown applications</li>
+                <li><strong>SSL/TLS Inspection:</strong> Examines encrypted traffic where permitted</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Policy Actions -->
+        <div class="slide">
+            <h2>Policy Actions & Controls</h2>
+            <h3>Available Actions:</h3>
+            <ul>
+                <li><strong>Allow:</strong> Permit application traffic with optional bandwidth limits</li>
+                <li><strong>Block:</strong> Completely deny application access</li>
+                <li><strong>Limit:</strong> Restrict bandwidth or connection limits</li>
+                <li><strong>Schedule:</strong> Time-based access controls</li>
+                <li><strong>Monitor:</strong> Allow but log all activity for compliance</li>
+                <li><strong>Warn:</strong> Display warning messages before allowing access</li>
+            </ul>
+            <div class="example-box">
+                <h4>Example Policy Rule:</h4>
+                <p>"Marketing department can use FileZilla during lunch hours (12-1 PM) with 2 Mbps bandwidth limit, but it's blocked during work hours (9-5 PM)"</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Business Use Cases -->
+        <div class="slide">
+            <h2>Business Use Cases</h2>
+            <div class="use-case">
+                <h3>🏢 Productivity Enhancement</h3>
+                <p>Block social media and streaming during work hours while allowing business-critical applications full bandwidth</p>
+            </div>
+            <div class="use-case">
+                <h3>🔒 Security Compliance</h3>
+                <p>Prevent unauthorised file sharing applications and enforce secure communication channels for sensitive data</p>
+            </div>
+            <div class="use-case">
+                <h3>📊 Bandwidth Optimisation</h3>
+                <p>Prioritize VoIP and video conferencing while limiting non-essential streaming and gaming traffic</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: Practical Examples -->
+        <div class="slide">
+            <h2>Real-World Implementation Examples</h2>
+            <h3>Example 1: Educational Institution</h3>
+            <div class="example-box">
+                <h4>Challenge:</h4>
+                <p>Students using Netflix and gaming during class time, consuming bandwidth needed for educational applications</p>
+                <h4>Solution:</h4>
+                <p>• Block entertainment applications during class hours (8 AM - 6 PM)<br>
+                • Allow educational apps unlimited bandwidth<br>
+                • Permit social media during breaks with bandwidth limits</p>
+            </div>
+            <h3>Example 2: Healthcare Organisation</h3>
+            <div class="example-box">
+                <h4>Challenge:</h4>
+                <p>HIPAA compliance requires controlling access to patient data applications and preventing unauthorised file sharing</p>
+                <h4>Solution:</h4>
+                <p>• Block all P2P file sharing applications<br>
+                • Restrict access to patient systems by user role<br>
+                • Monitor and log all access to medical applications</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Traffic Shaping Examples -->
+        <div class="slide">
+            <h2>Traffic Shaping in Action</h2>
+            <div class="policy-diagram">
+                <h3>Bandwidth Allocation Strategy</h3>
+                <p>Business Critical: 60% | Communications: 25% | General Web: 10% | Entertainment: 5%</p>
+            </div>
+            <h3>Common Shaping Scenarios:</h3>
+            <ul>
+                <li><strong>VoIP Priority:</strong> Guarantee low latency for voice calls (e.g., Skype, Teams)</li>
+                <li><strong>Video Conferencing:</strong> Allocate sufficient bandwidth for Zoom, WebEx during meetings</li>
+                <li><strong>Cloud Applications:</strong> Prioritise Salesforce, Office 365 over recreational apps</li>
+                <li><strong>Backup Systems:</strong> Limit overnight backup applications to prevent morning slowdowns</li>
+            </ul>
+            <div class="highlight">
+                <p><strong>Result:</strong> Improved user experience for business applications while maintaining network performance</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Advanced Features -->
+        <div class="slide">
+            <h2>Advanced Policy Features</h2>
+            <h3>User-Based Policies:</h3>
+            <ul>
+                <li><strong>Role-Based Access:</strong> Different rules for executives, employees, guests</li>
+                <li><strong>Department Policies:</strong> IT gets full access, Sales limited to CRM apps</li>
+                <li><strong>Device-Based Rules:</strong> Mobile devices vs. desktops have different restrictions</li>
+            </ul>
+            <h3>Time-Based Controls:</h3>
+            <ul>
+                <li><strong>Business Hours:</strong> Strict policies during work time</li>
+                <li><strong>Break Periods:</strong> Relaxed rules during lunch/break times</li>
+                <li><strong>Weekend Access:</strong> Different policies for non-business days</li>
+            </ul>
+            <div class="sophos-highlight">
+                Many firewall policy engines allow granular control combining user identity, time, location, and device type
+            </div>
+        </div>
+
+        <!-- Slide 10: Benefits & ROI -->
+        <div class="slide">
+            <h2>Benefits & Return on Investment</h2>
+            <h3>Security Benefits:</h3>
+            <ul>
+                <li>Reduced malware infections from blocked risky applications</li>
+                <li>Prevention of data exfiltration through unauthorized apps</li>
+                <li>Enhanced compliance with regulatory requirements</li>
+            </ul>
+            <h3>Performance Benefits:</h3>
+            <ul>
+                <li>Improved network performance for business-critical applications</li>
+                <li>Reduced bandwidth costs through efficient traffic management</li>
+                <li>Better user experience for important business tools</li>
+            </ul>
+            <div class="example-box">
+                <h4>ROI Example:</h4>
+                <p>A company with 500 employees saved $50,000 annually by preventing bandwidth overages and reducing security incidents through proper application control implementation.</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Implementation Best Practices -->
+        <div class="slide">
+            <h2>Implementation Best Practices</h2>
+            <h3>Planning Phase:</h3>
+            <ul>
+                <li><strong>Traffic Analysis:</strong> Monitor current application usage before implementing policies</li>
+                <li><strong>Stakeholder Engagement:</strong> Involve department heads in policy planning</li>
+                <li><strong>Phased Rollout:</strong> Start with monitoring mode before enforcement</li>
+            </ul>
+            <h3>Policy Design:</h3>
+            <ul>
+                <li><strong>Start Conservative:</strong> Begin with basic policies and add complexity gradually</li>
+                <li><strong>Business Alignment:</strong> Ensure policies support business objectives</li>
+                <li><strong>User Communication:</strong> Clearly communicate policy changes to users</li>
+            </ul>
+            <div class="highlight">
+                <p><strong>Key Success Factor:</strong> Balance security and productivity needs while maintaining user satisfaction</p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Summary -->
+        <div class="slide">
+            <h2>Summary</h2>
+            <div class="policy-diagram">
+                <h3>Application Control = Security + Performance + Compliance</h3>
+            </div>
+            <h3>Key Takeaways:</h3>
+            <ul>
+                <li>Application control policies provide granular control over network traffic</li>
+                <li>Sophos Application Policy Engine offers comprehensive application identification and control</li>
+                <li>Proper implementation improves security, performance, and compliance</li>
+                <li>Success requires careful planning, stakeholder engagement, and gradual rollout</li>
+            </ul>
+            <div class="sophos-highlight">
+                Modern networks require intelligent application control to balance security, performance, and user productivity
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="nav-btn" id="prevBtn">Previous</button>
+        <button class="nav-btn" id="nextBtn">Next</button>
+    </div>
+
+    <div class="slide-indicator" id="slideIndicator">
+        Slide 1 of 12
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideIndicator = document.getElementById('slideIndicator');
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            slideIndicator.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+            
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
