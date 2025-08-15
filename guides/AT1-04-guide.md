@@ -152,7 +152,7 @@ Use the same virtual machine image for PC-B as PC-A.
 **Note**: In industry, to comply with access control policies; you would no longer sign in using the default built in admin account. You would only sign in using your new administrator account.
 
 4. Add **multifactor authentication** to all user accounts by going to `Configure` > `Authentication` > `Multi-factor authentication` and setting One-time password (OTP) to All users.
-5. Log out and log in as the admin user you created earlier; you should be prompted to complete the multi-factor authentication process.
+5. Log out and log in as the admin user you created earlier; you should be prompted to complete the multi-factor authentication process (when signing in with a user using MFA, you need to add your code to the end of your password).
 6. To configure auto admin logout after inactivity, go to `System` > `Administration` > `Admin and user settings` > `Login security` and check the Logout admin session after X minutes of inactivity option.
 7. Create a login disclaimer under `System` > `Administration` > `Admin and user settings` by checking the `Enable login disclaimer` option.
 8. Disable all admin services from the WiFi and DMZ zones by going to `System` > `Administration` > `Device Access` and removing the check box for **HTTPs** and **SSH** under Admin services for the WiFi and DMZ zone.
