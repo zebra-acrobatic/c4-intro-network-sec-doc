@@ -119,6 +119,7 @@ Use the same virtual machine image for PC-B as PC-A.
   * Select the right interface.
   * Start the host IP addresses at 100 and finish them at 200.
   * Double check the remaining options for gateway and DNS server are listed as the Firewall's DMZ IP address.
+3. Go to `Administration` > `Device Access` and tick the DNS service for the DMZ zone. `Apply` the change.
   
 ## Testing Firewall Functionality
 1. On PC-A:
