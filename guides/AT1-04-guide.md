@@ -149,10 +149,10 @@ Use the same virtual machine image for PC-B as PC-A.
   * Set the email address as your TAFE email address.
   * Set the group to admins.
 
-**Note**: In industry, to comply with access control policies; you would no longer sign in using the default built in admin account. You would only sign in using your new administrator account.
+**Note**: It is considered general good practice to comply with access control policies by only using new admin account and not the default built in admin account. This practice is not required in the lab environment.
 
 4. Add **multifactor authentication** to all user accounts by going to `Configure` > `Authentication` > `Multi-factor authentication` and setting One-time password (OTP) to All users.
-5. Log out and log in as the admin user you created earlier; you should be prompted to complete the multi-factor authentication process (when signing in with a user using MFA, you need to add your code to the end of your password).
+5. Log out and log in as the admin user you created earlier; you should be prompted to complete the multi-factor authentication process (when signing in with a user using MFA, you need to add your code to the end of your password). **Note** that each time you login without using the MFA code, it will generate a new private key and you will need to re-add it to your MFA password authentication app.
 6. To configure auto admin logout after inactivity, go to `System` > `Administration` > `Admin and user settings` > `Login security` and check the Logout admin session after X minutes of inactivity option.
 7. Create a login disclaimer under `System` > `Administration` > `Admin and user settings` by checking the `Enable login disclaimer` option.
 8. Disable all admin services from the WiFi and DMZ zones by going to `System` > `Administration` > `Device Access` and removing the check box for **HTTPs** and **SSH** under Admin services for the WiFi and DMZ zone.
