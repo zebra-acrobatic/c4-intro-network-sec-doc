@@ -65,4 +65,4 @@ PC-A/B will communicate directly with each other.
   * Use `firewall-cmd --add-service=http` to open the required firewall port for Apache to accept connections.
 5.	On PC-A:
   *  Download the encrypted data. Use `wget http://X/encrypted.data`, replacing `X` with the IP address of the server.
-  *  Decrypt the data using the private key `penssl rsautl -decrypt -inkey private_key.pem -in encrypted.data -out ssl-secret.txt`. This will create the decrypted version of encrypted.data called ssl-secret.txt.
+  *  Decrypt the data using the private key `openssl rsautl -decrypt -inkey private_key.pem -in encrypted.data -out ssl-secret.txt`. This will create the decrypted version of encrypted.data called ssl-secret.txt.
