@@ -65,7 +65,7 @@ Note: If any of the above steps do not work correctly, follow the trouble shooti
 	* IP Version: `IPv4`
 	* Check `Activate on save`.
 	* Check `Create a firewall rule` to allow IPSEC traffic on the WAN firewall.
-	* Connection type: `Site-to-site`
+	* Connection type: `Policy-based`
 	* Gateway type: `Respond only`.
 	* Authentication type: `Preshared key` (set the key to something you know).
 	* Listening interface: `Port2` (Or what ever your WAN port is on the device).
