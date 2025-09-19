@@ -34,6 +34,8 @@ You can use the existing configuration from the previous labs or install a new f
 1.  Using PC-A browse to any common search engine and show that the firewall blocks the request.
 2.  Use the firewall's logging facilities to confirm the page was blocked by policy.
 
+Note: Some search enginges use QUIC (UDP port 443) to connect, if this is the case, you may need to apply the option to block QUIC traffic.
+
 # Application Control
 
 ## Using PC-A, download and install FileZilla
