@@ -43,6 +43,13 @@ You can use the existing configuration from the previous labs or install a new f
 2.  Open FileZilla on PC-A and try to connect outside:
   *  Under `Host`, enter `ftp://test.rebex.net` and try to connect, it should work.
 
+Note, if test.rebex.net is down, you can create a new site in Filezilla with the options:
+  - `Protocol`: FTP
+  - `Host`: ftp.dlptest.com
+  - `Encryption`: Only use plain FTP
+  - `Logon type`: Normal
+  - `Username` and `password` are on the documentation at the site https://www.dlptest.com/ftp-test/.
+
 ## Identify and implement an application filter that will block FileZilla traffic.
 1.  To implement an application filter that will block FileZilla traffic, log into the firewall using PC-A.
 2.  Go to `Protect` > `Applications` > `Application Filter` and find the name of the policy that will block the App FileZilla from reading the applications lists of the policies.
