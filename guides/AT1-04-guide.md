@@ -99,14 +99,12 @@ Use the same virtual machine image for PC-B as PC-A.
   * If there are mandatory updates required to the firewall, it may prompt you to complete them now.
   * Create a secure storage master key you will not forget (example P@ssw0rd1111) and press continue after checking the master key store message box.
   * Use your first name as the firewall’s host name and select Perth on the map and ensure the current time is correct and press continue.
+  * If the firewall asks you to register at this stage (or any other stage), use the `30 day trial` option. You may have to create or use an existing Sophos ID account on their web site to do this.
   * Opt out of the customer experience program and press continue.
-  * Read all the options but leave the defaults in the LAN network configuration page and press continue (it’s very important you understand what these options are).
-  * Do not tick any of the Network protection options, press continue.
-  * Enter any email address (example: test@test.com) in the Notifications and backups section (the firewall will not be provided with email facilities and will not be able to send emails anyway). Uncheck the Send configuration backup every week option and press continue.
-  * Configuration summary and testing steps are good times to take screen shots of the work you are doing. Screen shot the Configuration summary page, it is good evidence that you have configured the required options (note: you will not be instructed to take screen shots moving forward, it is your responsibility to ensure you preserve and record evidence of your work completion. Your assessor must be satisfied that you have unquestionably and correctly completed future work through authenticated screenshot evidence).
-  * Press Finish to complete the initial setup wizard.
+  * None of the remaining options are important at this time, and you can skip to the finish.
+  * Press Finish to complete the initial setup wizard. It may reboot.
 5.	The firewall may take some time to update and reboot. After reboot, sign in using admin and the password you defined in the setup process.
-6.	Again, use the `I don’t have a serial number (start a trial)` option, check the `I do not want to register now` option and press continue.
+6.	Once rebooted, log in again using the admin account and password configured during setup.
 7.	Click `No Thanks for the Sophos Central` advertisement (you will register a firewall device and use the central management tool later).
 
 ## Set up DNS/DHCP for the DMZ Network
