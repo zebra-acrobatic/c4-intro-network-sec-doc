@@ -122,7 +122,10 @@ Use the same virtual machine image for PC-B as PC-A.
 ## Testing Firewall Functionality
 1. On PC-A:
   * Confirm DNS works by using `nslookup example.com`, this should return a valid set of IP addresses from the firewall for the domain example.com
-  * Confirm Internet connectivity is working by doing a `ping 1.1.1.1`. This should show that you have a valid path from inside the private network to the outside public Internet.
+  * Confirm Internet connectivity is working by doing a `ping 1.1.1.1`. This should show that you have a valid path from inside the private network to the outside public Internet. If you find you do not, it's possible your default firewall rule was removed during setup. To add a new one go to `Protect` > `Rules and policies` > `Add firewall rule`. Enter the following settings:
+    * Rule name: Allow-all-default
+    * Source zones: LAN
+    * Destination zones: WAN
   * Confirm HTTP downloads work by using `curl http://example.com` in the command line, this will attempt to establish a HTTP connection and download files proving the application layer connections work.
 
 ## Firewall Hardening
