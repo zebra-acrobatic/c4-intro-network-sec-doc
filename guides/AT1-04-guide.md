@@ -99,7 +99,7 @@ Use the same virtual machine image for PC-B as PC-A.
   * If there are mandatory updates required to the firewall, it may prompt you to complete them now.
   * Create a secure storage master key you will not forget (example P@ssw0rd1111) and press continue after checking the master key store message box.
   * Use your first name as the firewall’s host name and select Perth on the map and ensure the current time is correct and press continue.
-  * If the firewall asks you to register at this stage (or any other stage), use the `30 day trial` option. You may have to create or use an existing Sophos ID account on their web site to do this.
+  * If the firewall asks you to register at this stage (or any other stage), use the `30 day trial` option. You may have to create or use an existing Sophos ID account on their web site to do this. Keep in mind the Sophos ID used for product registration is not the same as the Sophos ID used in the Sophos Academy, they are not linked and you may need to create a new account for the Sophos ID.
   * Opt out of the customer experience program and press continue.
   * None of the remaining options are important at this time, and you can skip to the finish.
   * Press Finish to complete the initial setup wizard. It may reboot.
