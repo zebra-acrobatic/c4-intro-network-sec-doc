@@ -66,7 +66,7 @@ Note: You can find IPS policy syntax using the [documentation](https://docs.soph
 
 ## Implement the new policy on the LAN outbound connections and demonstrate the functionality.
 1. Go to `Protect` > `Rules and policies` and find the firewall policy allowing your network to connect to the WAN (by default, it is the #Default_Network_Policy).
-2. Click the three dots on the `#Default_Network_Policy` rule and edit it.
+2. Click the three dots on the `#Default_Network_Policy` rule and edit it. If you don't have a default network policy, you need to use which ever policy allows ICMP through to the WAN from the LAN. Remember that the IPS will not apply to traffic that is already dropped by firewall rule policy.
 3. Scroll down to `Other security features` and turn on your IPS policy under.
 4. Press `Save`.
 5. On PC-A, try to ping 8.8.4.4, it should fail.
