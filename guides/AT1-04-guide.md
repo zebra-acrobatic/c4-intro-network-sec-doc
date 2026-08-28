@@ -105,7 +105,7 @@ Use the same virtual machine image for PC-B as PC-A.
   * Press Finish to complete the initial setup wizard. It may reboot.
 5.	The firewall may take some time to update and reboot. After reboot, sign in using admin and the password you defined in the setup process.
 6.	Once rebooted, log in again using the admin account and password configured during setup.
-7.	Click `No Thanks for the Sophos Central` advertisement (you will register a firewall device and use the central management tool later).
+7.	At some stage, it will ask what type of license you want to apply after using your Sophos Central account to sign in. Use the base license for now.
 
 ## Set up DNS/DHCP for the DMZ Network
 1. Configure the DMZ interface of the firewall by going to `Configure` > `Network` > `Interfaces` > `Port3`:
