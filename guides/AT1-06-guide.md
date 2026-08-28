@@ -89,7 +89,7 @@ Note: You can find IPS policy syntax using the [documentation](https://docs.soph
    * Action: Block.
    * Position: Top
    * Indicator type: URL.
-   * External URL: https://osint.digitalside.it/Threat-Intel/lists/latesturls.txt
+   * External URL: [https://osint.digitalside.it/Threat-Intel/lists/latesturls.txt](https://cinsscore.com/list/ci-badguys.txt)
    * Save.
  2. While the list downloads into the firewall, manually open it using a browser.
  3. Find any URL from the list that looks interesting.
