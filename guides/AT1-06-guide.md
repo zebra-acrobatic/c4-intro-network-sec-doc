@@ -32,7 +32,11 @@ PC-A should obtain its IP address from the DHCP server on the firewall.
 The firewall will apply intrusion prevention policies to the traffic from PC-A destined for the WAN zones.
 
 ## Enable IPS Protection
-1.	Go to `Protect` > `Intrusion prevention` > `IPS policies` and enable `IPS protection`. Note this will begin the download of the required IPS files and may take some time.
+1. In the firewall page, go to `System` > `Sophos Central` and register the firewall on Sophos Central using your Central account from previous setup.
+2. Go to Sophos Central in your browser and sign in. Ensure the firewall appears in the list of firewalls on your account.
+3. Click on the account page at the top right (the icon of the user) and click licenses and activate the Network Protection evaluation license for your firewall.
+4. On the Firewall, go to `Administration` > `Licensing` and click Syncronise to apply the new license.
+5. Go to `Protect` > `Intrusion prevention` > `IPS policies` and enable `IPS protection`. Note this will begin the download of the required IPS files and may take some time.
 
 ## Create a new custom signature to block a test connection
 Note: You can find IPS policy syntax using the [documentation](https://docs.sophos.com/nsg/sophos-firewall/21.5/help/en-us/webhelp/onlinehelp/AdministratorHelp/IntrusionPrevention/CustomIPSSignatures/index.html). 
